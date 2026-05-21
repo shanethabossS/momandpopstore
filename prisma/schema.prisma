@@ -1,0 +1,148 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Account {
+  id                 String  @id @default(cuid())
+  userId             String  @map("user_id")
+  type               String
+  provider           String
+  providerAccountId  String  @map("provider_account_id")
+  refresh_token      String? @db.Text
+  access_token       String? @db.Text
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String? @db.Text
+  session_state      String?
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+ 
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@map("sessions")
+}
+ 
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  phone         String?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  accounts      Account[]
+  sessions      Session[]
+  
+  storefront    Storefront?
+  reviews       Review[]
+
+  @@map("users")
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Storefront {
+  id              String   @id @default(cuid())
+  userId          String   @unique @map("user_id")
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name            String
+  slug            String   @unique
+  description     String?
+  logoUrl         String?
+  bannerUrl       String?
+  whatsappNumber  String?
+  categoryId      String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  location        String?
+  isFeatured      Boolean   @default(false)
+  boostStatus     String?
+  createdAt       DateTime  @default(now())
+
+  products        Product[]
+  reviews         Review[]
+  subscriptions   Subscription[]
+  transactions    Transaction[]
+
+  @@map("storefronts")
+}
+
+model Product {
+  id            String      @id @default(cuid())
+  storefrontId  String
+  storefront    Storefront  @relation(fields: [storefrontId], references: [id], onDelete: Cascade)
+  title         String
+  description   String?
+  price         Decimal     @db.Decimal(10, 2)
+  imageUrl      String?
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+
+  @@map("products")
+}
+
+model Category {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  storefronts Storefront[]
+
+  @@map("categories")
+}
+
+model Review {
+  id            String      @id @default(cuid())
+  storefrontId  String
+  storefront    Storefront  @relation(fields: [storefrontId], references: [id], onDelete: Cascade)
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  rating        Int
+  comment       String?
+  status        String      @default("pending")
+  createdAt     DateTime    @default(now())
+
+  @@map("reviews")
+}
+
+model Subscription {
+  id                 String     @id @default(cuid())
+  storefrontId       String
+  storefront         Storefront @relation(fields: [storefrontId], references: [id], onDelete: Cascade)
+  planName           String
+  status             String
+  currentPeriodEnd   DateTime
+
+  @@map("subscriptions")
+}
+
+model Transaction {
+  id            String     @id @default(cuid())
+  storefrontId  String
+  storefront    Storefront @relation(fields: [storefrontId], references: [id], onDelete: Cascade)
+  amount        Decimal    @db.Decimal(10, 2)
+  type          String     // 'subscription', 'boost'
+  status        String     // 'pending', 'completed'
+  createdAt     DateTime   @default(now())
+
+  @@map("transactions")
+}
