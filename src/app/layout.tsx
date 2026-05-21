@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Shop868",
+  title: "Mom & Pop Marketplace",
   description: "Verified Trinidad and Tobago local storefronts powered by Sovereign Digital Group Limited.",
 };
 

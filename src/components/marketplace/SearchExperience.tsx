@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Search, Store, Tag } from "lucide-react";
-import { allProducts, categories, searchStorefronts, storefronts } from "@/lib/shop868-data";
+import { allProducts, categories, searchStorefronts, storefronts } from "@/lib/marketplace-data";
 
 type SearchExperienceProps = {
   mode?: "hero" | "directory";
@@ -47,7 +47,7 @@ export function SearchExperience({ mode = "hero" }: SearchExperienceProps) {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search doubles, hardware, salons, Chaguanas, deals..."
           className="h-13 rounded-lg border-input bg-card pl-12 pr-4 text-base shadow-sm focus-visible:border-primary focus-visible:ring-primary/25"
-          aria-label="Search Shop868 storefronts and products"
+          aria-label="Search Mom & Pop Marketplace storefronts and products"
         />
       </div>
 

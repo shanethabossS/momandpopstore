@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { buildWhatsAppUrl, type Storefront } from "@/lib/shop868-data";
+import { buildWhatsAppUrl, type Storefront } from "@/lib/marketplace-data";
 import { CheckCircle2, MapPin, MessageCircle, Star, Zap } from "lucide-react";
 
 type StoreCardProps = {
@@ -12,7 +12,7 @@ type StoreCardProps = {
 export function StoreCard({ store, compact = false }: StoreCardProps) {
   const whatsappUrl = buildWhatsAppUrl(
     store.whatsapp,
-    `Hi ${store.name}, I found your storefront on Shop868 and want to place an order.`,
+    `Hi ${store.name}, I found your storefront on Mom & Pop Marketplace and want to place an order.`,
   );
 
   return (

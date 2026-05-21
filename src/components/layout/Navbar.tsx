@@ -8,10 +8,10 @@ export function Navbar() {
       <div className="container mx-auto flex min-h-16 items-center justify-between gap-4 px-4 py-3">
         <Link href="/" className="flex min-w-0 items-center gap-3">
           <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-black text-primary-foreground">
-            868
+            M&P
           </span>
           <span className="min-w-0">
-            <span className="block truncate text-xl font-black tracking-tight">Shop868</span>
+            <span className="block truncate text-xl font-black tracking-tight">Mom & Pop Marketplace</span>
             <span className="hidden text-xs font-medium text-muted-foreground sm:block">
               Powered by Sovereign Digital Group Limited
             </span>

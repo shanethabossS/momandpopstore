@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { SearchExperience } from "@/components/shop868/SearchExperience";
-import { StoreCard } from "@/components/shop868/StoreCard";
-import { storefronts } from "@/lib/shop868-data";
+import { SearchExperience } from "@/components/marketplace/SearchExperience";
+import { StoreCard } from "@/components/marketplace/StoreCard";
+import { storefronts } from "@/lib/marketplace-data";
 import {
   ArrowRight,
   BadgeCheck,
@@ -45,7 +45,7 @@ export default function Home() {
                 Get your Trinidad business online in 48 hours.
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                Shop868 is a local-first storefront ecosystem for T&T businesses: searchable pages,
+                Mom & Pop Marketplace is a local-first storefront ecosystem for T&T businesses: searchable pages,
                 product catalogs, WhatsApp orders, Fygaro payments, reviews, promotions, and trust
                 verification powered by Sovereign Digital Group Limited.
               </p>

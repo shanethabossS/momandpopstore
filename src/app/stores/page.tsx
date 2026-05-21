@@ -1,9 +1,9 @@
-import { SearchExperience } from "@/components/shop868/SearchExperience";
-import { StoreCard } from "@/components/shop868/StoreCard";
-import { storefronts } from "@/lib/shop868-data";
+import { SearchExperience } from "@/components/marketplace/SearchExperience";
+import { StoreCard } from "@/components/marketplace/StoreCard";
+import { storefronts } from "@/lib/marketplace-data";
 
 export const metadata = {
-  title: "Browse Trinidad Storefronts | Shop868",
+  title: "Browse Trinidad Storefronts | Mom & Pop Marketplace",
   description: "Search verified Trinidad and Tobago small business storefronts, products, categories, and deals.",
 };
 

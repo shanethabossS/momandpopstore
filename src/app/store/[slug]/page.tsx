@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { buildWhatsAppUrl, getStoreBySlug, storefronts } from "@/lib/shop868-data";
+import { buildWhatsAppUrl, getStoreBySlug, storefronts } from "@/lib/marketplace-data";
 import {
   BadgeCheck,
   Clock,
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: StoreProfileProps) {
   const store = getStoreBySlug(slug);
 
   return {
-    title: store ? `${store.name} | Shop868` : "Storefront | Shop868",
+    title: store ? `${store.name} | Mom & Pop Marketplace` : "Storefront | Mom & Pop Marketplace",
     description: store?.description,
   };
 }
@@ -43,7 +43,7 @@ export default async function StoreProfile({ params }: StoreProfileProps) {
 
   const storeMessage = buildWhatsAppUrl(
     store.whatsapp,
-    `Hi ${store.name}, I found your Shop868 storefront and want to order.`,
+    `Hi ${store.name}, I found your Mom & Pop Marketplace storefront and want to order.`,
   );
 
   return (
@@ -112,7 +112,7 @@ export default async function StoreProfile({ params }: StoreProfileProps) {
               {store.products.map((product) => {
                 const productMessage = buildWhatsAppUrl(
                   store.whatsapp,
-                  `Hi ${store.name}, I want to order ${product.name} (${product.price}) from your Shop868 storefront.`,
+                  `Hi ${store.name}, I want to order ${product.name} (${product.price}) from your Mom & Pop Marketplace storefront.`,
                 );
 
                 return (

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { storefronts } from "@/lib/shop868-data";
+import { storefronts } from "@/lib/marketplace-data";
 import {
   BadgeCheck,
   BarChart3,

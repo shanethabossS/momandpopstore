@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { storefronts } from "@/lib/shop868-data";
+import { storefronts } from "@/lib/marketplace-data";
 import { AlertTriangle, BadgeCheck, Megaphone, ShieldCheck, Store, Users } from "lucide-react";
 
 export default function AdminDashboard() {
@@ -17,7 +17,7 @@ export default function AdminDashboard() {
   return (
     <div className="container mx-auto w-full px-4 py-10">
       <div className="mb-8">
-        <h1 className="text-4xl font-black tracking-tight">Shop868 admin</h1>
+        <h1 className="text-4xl font-black tracking-tight">Mom & Pop admin</h1>
         <p className="mt-2 text-muted-foreground">
           Moderate stores, manage verification, featured listings, reports, categories, subscriptions, and support queues.
         </p>
@@ -71,7 +71,7 @@ export default function AdminDashboard() {
             </CardHeader>
             <CardContent className="space-y-3">
               {[
-                ["Shop868 Support", "12 open"],
+                ["Mom & Pop Support", "12 open"],
                 ["Merchant Verification", "5 open"],
                 ["Trust & Safety", "3 open"],
                 ["Payments Support", "2 open"],
