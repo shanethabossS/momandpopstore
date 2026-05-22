@@ -45,16 +45,16 @@ export default function Home() {
                 Get your Trinidad business online in 48 hours.
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                Mom & Pop Marketplace is a local-first storefront ecosystem for T&T businesses: searchable pages,
+                Shop868 is the fastest way for T&T businesses to go online: searchable storefronts,
                 product catalogs, WhatsApp orders, Fygaro payments, reviews, promotions, and trust
                 verification powered by Sovereign Digital Group Limited.
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <Link href="/dashboard">
+              <Link href="/signup">
                 <Button size="lg" className="h-12 w-full px-5 text-base sm:w-auto">
-                  Create storefront
+                  Get started free
                   <ArrowRight className="size-4" />
                 </Button>
               </Link>

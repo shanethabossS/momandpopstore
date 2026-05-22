@@ -127,5 +127,92 @@
   }
   html {
     @apply font-sans;
+    max-width: 100%;
+    overflow-x: hidden;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SOV Network Bar — shared top strip across SOV Digital apps
+   Mom & Pop Marketplace uses sov-* prefix with emerald accent
+   ═══════════════════════════════════════════════════════════ */
+
+.sov-network-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 1rem;
+  background: #0a1628;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.sov-network-bar::-webkit-scrollbar { display: none; }
+
+.sov-network-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.sov-network-chips {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.sov-network-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.5);
+  background: transparent;
+  transition: color 0.15s, background 0.15s;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.sov-network-chip:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.sov-network-chip-current {
+  color: #34d399;
+  background: rgba(52, 211, 153, 0.12);
+  pointer-events: none;
+}
+
+/* ── Shared utility: truncate text ─────────────────────── */
+.sov-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* ── Service Worker offline banner ─────────────────────── */
+.sov-offline-banner {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1e293b;
+  color: #f1f5f9;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }

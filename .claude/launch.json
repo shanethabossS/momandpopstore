@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "shop868",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev", "--port", "3007"],
+      "port": 3007,
+      "cwd": "C:\\AI_WORKSPACE\\01_PRODUCTS\\WEB_APPS\\mom-and-pops-shop"
+    }
+  ]
+}
