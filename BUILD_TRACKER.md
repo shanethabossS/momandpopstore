@@ -1,7 +1,9 @@
-# SOV Business Launch System — Build Tracker
+# Mom & Pop Store — Build Tracker
 
-**Project**: Shop868 / SOV Business Onboarding
+**Project**: Mom & Pop Store (Local T&T Marketplace)
 **Location**: `C:\AI_WORKSPACE\01_PRODUCTS\WEB_APPS\mom-and-pops-shop`
+**Repo**: `shanethabossS/momandpopstore`
+**Vercel**: `shop868-web.vercel.app`
 **API Backend**: `api.sovdigitalgroup.com/api/shop868/*` (Express + VPS Postgres)
 **Auth**: Central SOV Auth via proxy routes (HttpOnly cookies)
 **Stack**: Next.js 16, TailwindCSS, TypeScript, mobile-first
