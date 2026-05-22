@@ -17,20 +17,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Shop868 — Get Your Business Online in 48 Hours',
-  description: 'The fastest way for Trinidad & Tobago businesses to get online, accept payments, and grow. Setup in minutes.',
+  title: 'Mom & Pop Store — Local T&T Marketplace',
+  description: 'Discover verified local businesses in Trinidad & Tobago. Browse storefronts, products, deals, and order via WhatsApp.',
   openGraph: {
-    title: 'Shop868 — Get Your Business Online in 48 Hours',
-    description: 'The fastest way for Trinidad & Tobago businesses to get online, accept payments, and grow.',
+    title: 'Mom & Pop Store — Local T&T Marketplace',
+    description: 'Discover verified local businesses in Trinidad & Tobago. Browse storefronts, products, deals, and order via WhatsApp.',
     type: 'website',
-    siteName: 'Shop868',
+    siteName: 'Mom & Pop Store',
   },
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#146154',
+  themeColor: '#d97706',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -97,7 +97,7 @@ export default function DashboardPage() {
     <div className="container mx-auto w-full px-4 py-10">
       <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
         <div>
-          <Badge className="mb-3 bg-emerald-100 text-emerald-800">
+          <Badge className="mb-3 bg-amber-100 text-amber-800">
             <BadgeCheck className="size-3" />
             Merchant dashboard
           </Badge>

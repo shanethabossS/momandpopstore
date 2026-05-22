@@ -369,7 +369,7 @@ export default function OnboardingPage() {
                 <div className="rounded-lg border border-primary/30 bg-primary/5 p-4">
                   <h3 className="font-bold text-primary">Ready to launch!</h3>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    Your storefront will be live at <strong>shop868.com/store/{form.shop_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'your-business'}</strong>
+                    Your storefront will be live at <strong>momandpopstore.com/store/{form.shop_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'your-business'}</strong>
                   </p>
                 </div>
               </div>

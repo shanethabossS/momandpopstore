@@ -104,11 +104,11 @@ function LoginForm() {
       <div className="w-full max-w-sm space-y-6 rounded-xl border border-border bg-card p-8 shadow-lg">
         <div className="text-center">
           <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-xl bg-primary text-lg font-black text-primary-foreground">
-            868
+            M&P
           </div>
           <h1 className="text-2xl font-black tracking-tight">Welcome back</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Sign in to manage your storefront on Shop868.
+            Sign in to Mom &amp; Pop Store.
           </p>
         </div>
 

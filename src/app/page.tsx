@@ -37,17 +37,17 @@ const merchantSteps = [
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <section className="border-b border-border bg-[linear-gradient(180deg,#f7fbf8_0%,#ffffff_70%)]">
+      <section className="border-b border-border bg-[linear-gradient(180deg,#fffbf0_0%,#ffffff_70%)]">
         <div className="container mx-auto grid grid-cols-1 gap-10 px-4 py-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:items-center lg:py-16">
           <div className="min-w-0 max-w-3xl space-y-7">
             <div className="space-y-5">
               <h1 className="text-balance text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-                Get your Trinidad business online in 48 hours.
+                Discover local T&amp;T businesses you can trust.
               </h1>
               <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                Shop868 is the fastest way for T&T businesses to go online: searchable storefronts,
-                product catalogs, WhatsApp orders, Fygaro payments, reviews, promotions, and trust
-                verification powered by Sovereign Digital Group Limited.
+                Mom &amp; Pop Store is Trinidad &amp; Tobago&apos;s local marketplace. Discover verified
+                storefronts, browse product catalogs, order via WhatsApp, and support your
+                neighbourhood businesses — powered by Sovereign Digital Group Limited.
               </p>
             </div>
 
@@ -85,7 +85,7 @@ export default function Home() {
                 <h2 className="text-lg font-bold">Search local storefronts</h2>
                 <p className="text-sm text-muted-foreground">Find products, deals, places, and categories.</p>
               </div>
-              <Badge className="bg-emerald-100 text-emerald-800">Live UX</Badge>
+              <Badge className="bg-amber-100 text-amber-800">Live UX</Badge>
             </div>
             <SearchExperience />
           </div>

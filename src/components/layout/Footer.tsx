@@ -9,7 +9,7 @@ export function Footer() {
             <span className="flex size-7 items-center justify-center rounded-md bg-primary text-[10px] font-black text-primary-foreground">
               M&P
             </span>
-            <span className="font-bold text-foreground">Mom & Pop Marketplace</span>
+            <span className="font-bold text-foreground">Mom &amp; Pop Store</span>
           </div>
           <p className="max-w-xs text-xs leading-5">
             Verified Trinidad and Tobago local storefronts. Powered by Sovereign Digital Group Limited.
