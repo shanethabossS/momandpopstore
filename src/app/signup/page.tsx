@@ -12,8 +12,8 @@ const FALLBACK_API = 'https://api.sovdigitalgroup.com';
 
 function getGoogleOAuthUrl(nextPath: string) {
   const apiBase = (process.env.NEXT_PUBLIC_API_URL || '').trim().replace(/\/$/, '') || FALLBACK_API;
-  const redirectUri = typeof window !== 'undefined' ? `${window.location.origin}/login?from=google` : '';
-  return `${apiBase}/api/auth/google?redirect_uri=${encodeURIComponent(redirectUri)}&next=${encodeURIComponent(nextPath)}`;
+  const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/login` : '';
+  return `${apiBase}/api/auth/google?redirectTo=${encodeURIComponent(redirectTo)}`;
 }
 
 export default function SignupPage() {
