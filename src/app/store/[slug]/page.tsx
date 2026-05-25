@@ -415,11 +415,14 @@ export default async function StoreProfile({ params }: StoreProfileProps) {
                       <h3 className="font-bold">Payment Methods</h3>
                     </div>
                     <div className="flex flex-wrap gap-2">
-                      {["Cash", "Transfer", "WhatsApp Pay"].map((method) => (
+                      {["Fygaro (Card/Online)", "Cash", "Transfer", "WhatsApp Pay"].map((method) => (
                         <Badge key={method} variant="outline" className="px-3 py-1 text-xs">
                           {method}
                         </Badge>
                       ))}
+                      <Badge variant="outline" className="px-3 py-1 text-xs opacity-50 border-dashed">
+                        TTPay (Coming Soon)
+                      </Badge>
                     </div>
                   </CardContent>
                 </Card>

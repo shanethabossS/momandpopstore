@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { getEcosystemLinks } from "@/lib/sov-ecosystem";
+
+const NETWORK_SITES = getEcosystemLinks("momandpopstore");
 
 export function Footer() {
   return (
@@ -33,6 +36,22 @@ export function Footer() {
               <Link href="/about" className="hover:text-foreground">About</Link>
               <Link href="/terms" className="hover:text-foreground">Terms</Link>
               <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-foreground">SOV Network</h4>
+            <div className="flex flex-wrap gap-1.5">
+              {NETWORK_SITES.map((site) => (
+                <a
+                  key={site.slug}
+                  href={site.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-md border border-border/60 bg-muted/50 px-2 py-1 text-xs hover:text-foreground hover:border-primary/40 transition-colors"
+                >
+                  {site.name}
+                </a>
+              ))}
             </div>
           </div>
         </div>
