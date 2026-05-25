@@ -36,6 +36,7 @@ type Listing = {
   status: string;
   image_url?: string;
   is_available?: boolean;
+  _confirmText?: string;
 };
 
 type Shop = {
