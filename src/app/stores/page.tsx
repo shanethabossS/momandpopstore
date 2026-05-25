@@ -44,7 +44,7 @@ export default function StoresDirectory() {
         (store) =>
           store.name.toLowerCase().includes(q) ||
           store.description?.toLowerCase().includes(q) ||
-          store.categories?.some((c) => c.toLowerCase().includes(q)) ||
+          store.categories?.some((c: string) => c.toLowerCase().includes(q)) ||
           store.location?.toLowerCase().includes(q) ||
           store.tags?.some((t) => t.toLowerCase().includes(q))
       );

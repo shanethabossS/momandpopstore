@@ -6,6 +6,8 @@ export type Product = {
   tags: string[];
   payment: "Fygaro link" | "Deposit accepted" | "WhatsApp quote";
   featured?: boolean;
+  availability?: boolean;
+  image?: string;
 };
 
 export type Storefront = {
@@ -13,6 +15,7 @@ export type Storefront = {
   name: string;
   initials: string;
   category: string;
+  categories?: string[];
   location: string;
   address: string;
   description: string;
