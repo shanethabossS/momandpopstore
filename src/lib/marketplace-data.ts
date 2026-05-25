@@ -25,6 +25,11 @@ export type Storefront = {
   tags: string[];
   deals: string[];
   products: Product[];
+  phone?: string;
+  email?: string;
+  website?: string;
+  socials?: { facebook?: string; instagram?: string; twitter?: string };
+  payment_methods?: string[];
 };
 
 export const categories = [
