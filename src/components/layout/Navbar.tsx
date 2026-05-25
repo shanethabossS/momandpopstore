@@ -75,7 +75,7 @@ export function Navbar() {
           {!loading && user ? (
             <div className="flex items-center gap-2">
               <span className="max-w-[160px] truncate rounded-full border border-border bg-muted/60 px-3 py-1.5 text-xs font-semibold">
-                {user.full_name || user.email}
+                {user.name || user.email}
               </span>
               <Button variant="outline" size="sm" onClick={logout}>
                 Sign out

@@ -153,7 +153,7 @@ export default function OnboardingPage() {
       <div className="mb-8">
         <h1 className="text-3xl font-black tracking-tight">Set up your storefront</h1>
         <p className="mt-2 text-muted-foreground">
-          {user?.full_name ? `Hey ${user.full_name.split(' ')[0]}, let's` : "Let's"} get your business online.
+          {user?.name ? `Hey ${user.name.split(' ')[0]}, let's` : "Let's"} get your business online.
         </p>
       </div>
 

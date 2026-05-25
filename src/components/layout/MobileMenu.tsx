@@ -36,7 +36,7 @@ export function MobileMenu() {
             {!loading && user ? (
               <div className="flex flex-col gap-2 px-3">
                 <span className="truncate text-xs font-semibold text-muted-foreground">
-                  {user.full_name || user.email}
+                  {user.name || user.email}
                 </span>
                 <Button variant="outline" size="sm" onClick={() => { setOpen(false); logout(); }}>
                   Sign out
