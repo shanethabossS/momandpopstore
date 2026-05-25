@@ -14,19 +14,21 @@ import {
   Copy,
   CreditCard,
   ExternalLink,
-  Facebook,
   Globe,
-  Instagram,
   MapPin,
   MessageCircle,
   Phone,
   Share2,
   Star,
   Timer,
-  Twitter,
   Wallet,
-  WhatsApp,
 } from "lucide-react";
+
+// lucide-react doesn't include brand icons; alias to closest equivalents
+const WhatsApp = MessageCircle;
+const Twitter = Globe;
+const Facebook = Globe;
+const Instagram = Globe;
 
 type StoreProfileProps = {
   params: Promise<{ slug: string }>;
