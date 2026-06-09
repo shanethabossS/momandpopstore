@@ -24,7 +24,7 @@ export const SOV_ECOSYSTEM: SovSite[] = [
   { name: 'ShowLoveTT', slug: 'showlovett', url: 'https://showlovett.com', description: 'Crowdfunding & donations', category: 'finance', live: true },
   { name: 'TalkFreeTT', slug: 'talkfreett', url: 'https://talkfreett.com', description: 'Community forum', category: 'social', live: true },
   { name: 'FoodsTT', slug: 'foodtt', url: 'https://foodstt.com', description: 'Food delivery & ordering', category: 'marketplace', live: true },
-  { name: 'AuctionTT', slug: 'auctiontt', url: 'https://auctionsite-web.vercel.app', description: 'Online auctions', category: 'marketplace', live: true },
+  { name: 'DealzTT', slug: 'auctiontt', url: 'https://dealztt.com', description: 'Online auctions', category: 'marketplace', live: true },
   { name: 'Mom & Pop Store', slug: 'momandpopstore', url: 'https://momandpopstore.vercel.app', description: 'Local storefront marketplace', category: 'marketplace', live: true },
   { name: 'SOV Connect', slug: 'sovconnect', url: 'https://ttmerchant.vercel.app', description: 'Business & driver onboarding', category: 'service', live: true },
   { name: 'Shop868', slug: 'shop868', url: '#', description: 'Caribbean mobile marketplace', category: 'mobile', live: false },
