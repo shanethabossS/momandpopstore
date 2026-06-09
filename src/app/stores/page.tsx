@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { SearchExperience } from "@/components/marketplace/SearchExperience";
 import { StoreCard } from "@/components/marketplace/StoreCard";
 import { storefronts } from "@/lib/marketplace-data";
@@ -33,6 +33,38 @@ export default function StoresDirectory() {
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [sortMode, setSortMode] = useState<SortMode>("featured");
   const [showFilters, setShowFilters] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeSuggestion, setActiveSuggestion] = useState(-1);
+  const searchWrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handlePointerDown(event: MouseEvent) {
+      if (searchWrapRef.current && !searchWrapRef.current.contains(event.target as Node)) {
+        setShowSuggestions(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    return () => document.removeEventListener("mousedown", handlePointerDown);
+  }, []);
+
+  const searchSuggestions = useMemo(() => {
+    const term = searchQuery.trim().toLowerCase();
+    const items = Array.from(
+      new Set(
+        storefronts.flatMap((store) => [
+          store.name,
+          store.location,
+          ...(store.categories || []),
+          ...store.tags,
+          ...store.products.map((product) => product.name),
+        ])
+      )
+    ).filter((item): item is string => typeof item === "string" && item.trim().length > 0);
+
+    if (!term) return items.slice(0, 8);
+    return items.filter((item) => item.toLowerCase().includes(term)).slice(0, 8);
+  }, [searchQuery]);
 
   const filteredStores = useMemo(() => {
     let result = [...storefronts];
@@ -94,14 +126,57 @@ export default function StoresDirectory() {
 
             {/* Search bar */}
             <div className="flex-1 max-w-md md:max-w-lg lg:max-w-xl">
-              <div className="relative">
+              <div className="relative" ref={searchWrapRef}>
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                 <Input
                   placeholder="Search stores, products, categories..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onChange={(e) => {
+                    setSearchQuery(e.target.value);
+                    setShowSuggestions(true);
+                    setActiveSuggestion(-1);
+                  }}
+                  onFocus={() => {
+                    if (searchSuggestions.length > 0) setShowSuggestions(true);
+                  }}
+                  onKeyDown={(e) => {
+                    if (!showSuggestions || searchSuggestions.length === 0) return;
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      setActiveSuggestion((prev) => (prev + 1) % searchSuggestions.length);
+                    } else if (e.key === "ArrowUp") {
+                      e.preventDefault();
+                      setActiveSuggestion((prev) => (prev <= 0 ? searchSuggestions.length - 1 : prev - 1));
+                    } else if (e.key === "Enter" && activeSuggestion >= 0) {
+                      e.preventDefault();
+                      setSearchQuery(searchSuggestions[activeSuggestion]);
+                      setShowSuggestions(false);
+                    } else if (e.key === "Escape") {
+                      setShowSuggestions(false);
+                    }
+                  }}
                   className="pl-10 h-11 bg-background border-border/60 focus:border-primary transition-all"
                 />
+                {showSuggestions && searchSuggestions.length > 0 && (
+                  <ul className="absolute left-0 right-0 top-[calc(100%+8px)] z-20 overflow-hidden rounded-xl border border-border bg-background shadow-xl">
+                    {searchSuggestions.map((item, index) => (
+                      <li
+                        key={`${item}-${index}`}
+                        className={`cursor-pointer px-3 py-2 text-sm transition ${
+                          index === activeSuggestion ? "bg-primary/10 text-foreground" : "text-muted-foreground hover:bg-muted"
+                        }`}
+                        onMouseEnter={() => setActiveSuggestion(index)}
+                        onMouseDown={(e) => e.preventDefault()}
+                        onClick={() => {
+                          setSearchQuery(item);
+                          setShowSuggestions(false);
+                        }}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
