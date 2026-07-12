@@ -44,3 +44,7 @@ next-env.d.ts
 
 playwright-report/
 test-results/
+
+# Vercel CLI env pull outputs (may contain live secrets)
+.env.vercel*
+.env*.production
