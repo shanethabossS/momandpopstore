@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
@@ -41,11 +42,37 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: StoreProfileProps) {
   const { slug } = await params;
   const store = getStoreBySlug(slug);
+  const title = store ? `${store.name} | Mom & Pop Store` : "Storefront | Mom & Pop Store";
+  const description = store?.description || 'Browse trusted local storefronts in Trinidad & Tobago.';
+  const image = 'https://momandpopstore.com/opengraph-image';
 
   return {
-    title: store ? `${store.name} | Mom & Pop Marketplace` : "Storefront | Mom & Pop Marketplace",
-    description: store?.description,
-  };
+    title,
+    description,
+    alternates: {
+      canonical: `/store/${slug}`,
+    },
+    openGraph: {
+      title,
+      description,
+      url: `https://momandpopstore.com/store/${slug}`,
+      type: 'website',
+      images: [
+        {
+          url: image,
+          width: 1200,
+          height: 630,
+          alt: store?.name || 'Mom & Pop Store',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [image],
+    },
+  } satisfies Metadata;
 }
 
 export default async function StoreProfile({ params }: StoreProfileProps) {
@@ -63,6 +90,31 @@ export default async function StoreProfile({ params }: StoreProfileProps) {
 
   return (
     <div className="pb-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Store',
+            name: store.name,
+            description: store.description,
+            url: `https://momandpopstore.com/store/${store.slug}`,
+            telephone: store.phone || store.whatsapp,
+            address: {
+              '@type': 'PostalAddress',
+              addressCountry: 'TT',
+              addressLocality: store.location,
+              streetAddress: store.address,
+            },
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: store.rating,
+              reviewCount: store.reviews,
+            },
+            sameAs: Object.values(store.socials || {}).filter(Boolean),
+          }),
+        }}
+      />
       {/* ===== HERO HEADER ===== */}
       <section className="border-b border-border bg-[linear-gradient(135deg,rgba(20,97,84,0.14),rgba(226,181,80,0.22)),linear-gradient(180deg,#ffffff,#f7fbf8)]">
         <div className="container mx-auto px-4 py-6 sm:py-8">
