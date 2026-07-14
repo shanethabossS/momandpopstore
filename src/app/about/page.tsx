@@ -16,7 +16,7 @@ export default function AboutPage() {
           support infrastructure across the SOV Network of T&amp;T digital products.
         </p>
         <p>
-          Have questions? WhatsApp us or email support@sovdigitalgroup.com.
+          Have questions? Email info@sovdigitalgroup.com or databosstt@gmail.com.
         </p>
       </div>
     </div>
