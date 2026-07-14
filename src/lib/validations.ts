@@ -42,3 +42,15 @@ export const moderateSchema = z.object({
   action: z.enum(['approve', 'reject', 'disable', 'feature', 'unfeature']),
   reason: z.string().max(500).optional(),
 })
+
+export const deliveryRequestSchema = z.object({
+  orderId: z.string().min(1).max(200),
+  customerName: z.string().min(1).max(160),
+  customerPhone: z.string().max(64).optional(),
+  merchantName: z.string().max(160).optional(),
+  pickupZoneId: z.string().uuid(),
+  dropoffZoneId: z.string().uuid(),
+  pickupAddress: z.string().min(1).max(500),
+  dropoffAddress: z.string().min(1).max(500),
+  instructions: z.string().max(1000).optional(),
+})
