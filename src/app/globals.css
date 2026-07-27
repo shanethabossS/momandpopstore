@@ -10,6 +10,9 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-sans);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-contrast: var(--brand-contrast);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,73 +51,89 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   BRAND — Mom & Pop Store · Amber / Terracotta
+   The ONLY block that differs between SOV marketplace apps.
+   (Shop868 uses the teal/cyan variant.)
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  --brand: oklch(0.68 0.16 55);          /* ~ #d97706 amber-600 */
+  --brand-strong: oklch(0.60 0.15 50);   /* hover / pressed     */
+  --brand-contrast: oklch(0.99 0 0);     /* text on brand       */
+}
+.dark {
+  --brand: oklch(0.80 0.15 68);          /* warm amber */
+  --brand-strong: oklch(0.86 0.14 72);
+  --brand-contrast: oklch(0.16 0.02 60);
+}
+
 :root {
   --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.025 55);
+  --foreground: oklch(0.18 0.02 60);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.025 55);
+  --card-foreground: oklch(0.18 0.02 60);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.025 55);
-  --primary: oklch(0.55 0.16 45);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.88 0.06 75);
-  --secondary-foreground: oklch(0.25 0.04 55);
-  --muted: oklch(0.965 0.012 65);
-  --muted-foreground: oklch(0.48 0.03 55);
-  --accent: oklch(0.72 0.14 55);
-  --accent-foreground: oklch(0.18 0.03 55);
+  --popover-foreground: oklch(0.18 0.02 60);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-contrast);
+  --secondary: oklch(0.96 0.012 75);
+  --secondary-foreground: oklch(0.24 0.03 60);
+  --muted: oklch(0.965 0.01 75);
+  --muted-foreground: oklch(0.5 0.025 60);
+  --accent: oklch(0.95 0.03 70);
+  --accent-foreground: oklch(0.2 0.03 60);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.015 65);
-  --input: oklch(0.9 0.015 65);
-  --ring: oklch(0.58 0.12 45);
-  --chart-1: oklch(0.55 0.16 45);
+  --border: oklch(0.9 0.012 70);
+  --input: oklch(0.9 0.012 70);
+  --ring: var(--brand);
+  --chart-1: var(--brand);
   --chart-2: oklch(0.72 0.14 55);
   --chart-3: oklch(0.55 0.1 250);
   --chart-4: oklch(0.62 0.14 35);
   --chart-5: oklch(0.5 0.08 310);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.985 0.01 65);
-  --sidebar-foreground: oklch(0.18 0.025 55);
-  --sidebar-primary: oklch(0.55 0.16 45);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.965 0.012 65);
-  --sidebar-accent-foreground: oklch(0.18 0.025 55);
-  --sidebar-border: oklch(0.9 0.015 65);
-  --sidebar-ring: oklch(0.58 0.12 45);
+  --radius: 0.75rem;
+  --sidebar: oklch(0.985 0.008 75);
+  --sidebar-foreground: oklch(0.18 0.02 60);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: var(--brand-contrast);
+  --sidebar-accent: oklch(0.965 0.01 75);
+  --sidebar-accent-foreground: oklch(0.18 0.02 60);
+  --sidebar-border: oklch(0.9 0.012 70);
+  --sidebar-ring: var(--brand);
 }
 
 .dark {
-  --background: oklch(0.1 0.01 250);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.13 0.01 250);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.13 0.01 250);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.85 0.15 210); /* Neon Cyan */
-  --primary-foreground: oklch(0.1 0 0);
-  --secondary: oklch(0.65 0.28 330); /* Neon Magenta */
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.2 0.01 250);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.85 0.2 140); /* Neon Lime */
-  --accent-foreground: oklch(0.1 0 0);
+  --background: oklch(0.15 0.012 60);
+  --foreground: oklch(0.97 0.008 75);
+  --card: oklch(0.185 0.014 60);
+  --card-foreground: oklch(0.97 0.008 75);
+  --popover: oklch(0.185 0.014 60);
+  --popover-foreground: oklch(0.97 0.008 75);
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-contrast);
+  --secondary: oklch(0.25 0.016 60);
+  --secondary-foreground: oklch(0.97 0.008 75);
+  --muted: oklch(0.23 0.014 60);
+  --muted-foreground: oklch(0.68 0.02 70);
+  --accent: oklch(0.28 0.035 65);
+  --accent-foreground: oklch(0.97 0.008 75);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.25 0.01 250);
-  --input: oklch(0.25 0.01 250);
-  --ring: oklch(0.85 0.15 210);
-  --chart-1: oklch(0.85 0.15 210);
+  --border: oklch(0.28 0.016 60);
+  --input: oklch(0.28 0.016 60);
+  --ring: var(--brand);
+  --chart-1: var(--brand);
   --chart-2: oklch(0.65 0.28 330);
   --chart-3: oklch(0.85 0.2 140);
   --chart-4: oklch(0.7 0.2 60);
   --chart-5: oklch(0.6 0.2 280);
-  --sidebar: oklch(0.1 0.01 250);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.85 0.15 210);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.2 0.01 250);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.25 0.01 250);
-  --sidebar-ring: oklch(0.85 0.15 210);
+  --sidebar: oklch(0.15 0.012 60);
+  --sidebar-foreground: oklch(0.97 0.008 75);
+  --sidebar-primary: var(--brand);
+  --sidebar-primary-foreground: var(--brand-contrast);
+  --sidebar-accent: oklch(0.25 0.016 60);
+  --sidebar-accent-foreground: oklch(0.97 0.008 75);
+  --sidebar-border: oklch(0.28 0.016 60);
+  --sidebar-ring: var(--brand);
 }
 
 @layer base {
@@ -133,16 +152,30 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   SOV Network Bar — shared top strip across SOV Digital apps
-   Mom & Pop Store uses sov-* prefix with amber accent
+   SOV MARKETPLACE DESIGN MODULE  (shared — identical in both apps)
+   Everything below is theme-aware via the tokens above.
    ═══════════════════════════════════════════════════════════ */
 
+/* Smooth, targeted theme cross-fade (skipped for reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  body,
+  .mkt-surface,
+  header,
+  footer,
+  .mkt-card-media,
+  .mkt-category {
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* ── SOV Network top strip ─────────────────────────────── */
 .sov-network-bar {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.35rem 1rem;
-  background: #0a1628;
+  gap: 0.6rem;
+  padding: 0 1rem;
+  height: 32px;
+  background: #0a1424;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   overflow-x: auto;
   -ms-overflow-style: none;
@@ -151,57 +184,249 @@
 .sov-network-bar::-webkit-scrollbar { display: none; }
 
 .sov-network-label {
-  font-size: 0.65rem;
+  font-size: 0.66rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.09em;
+  color: rgba(255, 255, 255, 0.4);
   white-space: nowrap;
   flex-shrink: 0;
+  padding-right: 0.55rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .sov-network-chips {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.2rem;
   align-items: center;
+}
+
+.sov-network-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
 }
 
 .sov-network-chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.2rem 0.55rem;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 999px;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
   white-space: nowrap;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   background: transparent;
   transition: color 0.15s, background 0.15s;
   text-decoration: none;
   flex-shrink: 0;
+  border: 0;
 }
 .sov-network-chip:hover {
   color: #fff;
   background: rgba(255, 255, 255, 0.08);
 }
-
 .sov-network-chip-current {
-  color: #f59e0b;
-  background: rgba(245, 158, 11, 0.12);
-  pointer-events: none;
+  color: var(--brand-contrast);
+  background: var(--brand);
+  cursor: default;
+}
+.dark .sov-network-chip-current {
+  color: #0a1424;
 }
 
-/* ── Shared utility: truncate text ─────────────────────── */
-.sov-truncate {
-  white-space: nowrap;
+/* ── Theme toggle button ───────────────────────────────── */
+.mkt-theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--foreground);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+.mkt-theme-toggle:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+.mkt-theme-toggle:active { transform: scale(0.94); }
+.mkt-theme-toggle .mkt-icon-moon { display: none; }
+.mkt-theme-toggle .mkt-icon-sun { display: block; }
+.dark .mkt-theme-toggle .mkt-icon-moon { display: block; }
+.dark .mkt-theme-toggle .mkt-icon-sun { display: none; }
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0);
+  white-space: nowrap; border: 0;
+}
+
+/* ── Scroll-reveal ─────────────────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 600ms cubic-bezier(.22,.8,.25,1), transform 600ms cubic-bezier(.22,.8,.25,1);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Hero ──────────────────────────────────────────────── */
+.mkt-hero {
+  position: relative;
   overflow: hidden;
-  text-overflow: ellipsis;
-  min-width: 0;
-  max-width: 100%;
+  background: #0a0a0c;
+  color: #fff;
+}
+.mkt-hero-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+  background: radial-gradient(
+    560px circle at var(--pointer-x, 72%) var(--pointer-y, 35%),
+    color-mix(in oklch, var(--brand) 55%, transparent),
+    transparent 60%
+  );
 }
 
-/* ── Service Worker offline banner ─────────────────────── */
+/* ── Section headings ──────────────────────────────────── */
+.mkt-kicker {
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--foreground) 52%, transparent);
+}
+.mkt-title {
+  margin-top: .25rem;
+  font-size: clamp(1.65rem, 3vw, 2.55rem);
+  font-weight: 850;
+  letter-spacing: -.055em;
+  line-height: .95;
+  color: var(--foreground);
+}
+.mkt-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8rem;
+  font-weight: 750;
+  color: var(--brand);
+  text-decoration: none;
+}
+.mkt-link span { transition: transform 180ms ease; }
+.mkt-link:hover span { transform: translateX(4px); }
+
+/* ── Brand button ──────────────────────────────────────── */
+.mkt-btn-brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand);
+  color: var(--brand-contrast);
+  font-weight: 700;
+  border: 0;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.mkt-btn-brand:hover { background: var(--brand-strong); }
+.mkt-btn-brand:active { transform: scale(0.98); }
+
+/* ── Product / store cards ─────────────────────────────── */
+.mkt-card { text-decoration: none; color: inherit; }
+.mkt-card-media {
+  position: relative;
+  aspect-ratio: 1.42 / 1;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--muted);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  transition: box-shadow 0.25s ease;
+}
+.mkt-card:hover .mkt-card-media {
+  box-shadow: 0 12px 28px -10px color-mix(in oklch, var(--brand) 45%, transparent);
+}
+.mkt-card-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 70% 20%, color-mix(in oklch, var(--brand) 26%, transparent), transparent 40%),
+    linear-gradient(135deg, color-mix(in oklch, var(--foreground) 6%, var(--muted)), color-mix(in oklch, var(--foreground) 18%, var(--muted)));
+}
+.mkt-card-fallback::before {
+  content: '';
+  position: absolute;
+  width: 42%;
+  aspect-ratio: 1;
+  border: 1px solid color-mix(in oklch, var(--foreground) 15%, transparent);
+  border-radius: 50%;
+}
+.mkt-card-fallback span {
+  position: relative;
+  font-size: clamp(1.5rem, 4vw, 3.2rem);
+  font-weight: 900;
+  letter-spacing: -.08em;
+  color: color-mix(in oklch, var(--foreground) 74%, transparent);
+}
+.mkt-card-title { color: var(--foreground); }
+.mkt-card-meta { color: var(--muted-foreground); }
+
+/* ── Category tiles ────────────────────────────────────── */
+.mkt-category {
+  position: relative;
+  display: flex;
+  min-height: 132px;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem;
+  color: var(--foreground);
+  text-decoration: none;
+  transition: background 180ms ease, color 180ms ease;
+}
+.mkt-category-index {
+  font-size: 10px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: color-mix(in oklch, var(--foreground) 34%, transparent);
+}
+.mkt-category-label {
+  margin-top: 1.75rem;
+  max-width: 14ch;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.mkt-category-arrow {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: color-mix(in oklch, var(--foreground) 26%, transparent);
+  transition: transform 180ms ease, color 180ms ease;
+}
+.mkt-category:hover {
+  color: var(--brand-contrast);
+  background: var(--brand);
+}
+.mkt-category:hover .mkt-category-index,
+.mkt-category:hover .mkt-category-arrow {
+  color: color-mix(in oklch, var(--brand-contrast) 70%, transparent);
+}
+.mkt-category:hover .mkt-category-arrow { transform: translateX(4px); }
+
+/* ── Offline banner ────────────────────────────────────── */
 .sov-offline-banner {
   position: fixed;
   bottom: 1rem;
@@ -217,102 +442,12 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 600ms cubic-bezier(.22,.8,.25,1), transform 600ms cubic-bezier(.22,.8,.25,1);
-}
-
-[data-reveal].is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.mp-kicker {
-  font-size: .68rem;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgb(0 0 0 / 42%);
-}
-
-.mp-title {
-  margin-top: .25rem;
-  font-size: clamp(1.65rem, 3vw, 2.55rem);
-  font-weight: 850;
-  letter-spacing: -.055em;
-  line-height: .95;
-}
-
-.mp-link {
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  font-size: .8rem;
-  font-weight: 750;
-}
-
-.mp-link span {
-  transition: transform 180ms ease;
-}
-
-.mp-link:hover span {
-  transform: translateX(4px);
-}
-
-.mp-card-media {
-  position: relative;
-  aspect-ratio: 1.42 / 1;
+.sov-truncate {
+  white-space: nowrap;
   overflow: hidden;
-  border-radius: 1rem;
-  background: #e8e8e5;
-}
-
-.mp-card-fallback {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at 70% 20%, rgb(255 56 92 / 26%), transparent 35%),
-    linear-gradient(135deg, #dfdfda, #bcbcb5);
-}
-
-.mp-card-fallback::before {
-  content: '';
-  position: absolute;
-  width: 42%;
-  aspect-ratio: 1;
-  border: 1px solid rgb(0 0 0 / 15%);
-  border-radius: 50%;
-}
-
-.mp-card-fallback span {
-  position: relative;
-  font-size: clamp(1.5rem, 4vw, 3.2rem);
-  font-weight: 900;
-  letter-spacing: -.08em;
-  color: rgb(0 0 0 / 74%);
-}
-
-.mp-category {
-  position: relative;
-  display: flex;
-  min-height: 132px;
-  flex-direction: column;
-  border-right: 1px solid rgb(0 0 0 / 10%);
-  border-bottom: 1px solid rgb(0 0 0 / 10%);
-  padding: 1rem;
-  transition: background 180ms ease, color 180ms ease;
-}
-
-.mp-category:hover {
-  color: white;
-  background: #111;
-}
-
-.mp-category:hover > span:first-child {
-  color: rgb(255 255 255 / 40%);
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -321,7 +456,5 @@
     transform: none;
     transition: none;
   }
-  .mp-card-media * {
-    transition: none !important;
-  }
+  .mkt-card-media * { transition: none !important; }
 }

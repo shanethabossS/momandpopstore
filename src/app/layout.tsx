@@ -4,6 +4,8 @@ import './globals.css';
 import { AuthProvider } from '@/lib/auth-context';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { NetworkBar } from '@/components/NetworkBar';
+import { ThemeScript } from '@/components/theme/ThemeScript';
 import { ServiceWorkerRegister } from '@/components/ServiceWorkerRegister';
 
 const siteUrl = 'https://momandpopstore.com';
@@ -65,8 +67,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
+        <ThemeScript />
         <link rel="manifest" href="/manifest.json" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <link rel="apple-touch-icon" href="/icon-192.png" />
@@ -88,8 +91,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-background text-foreground">
         <AuthProvider>
+          <NetworkBar currentSite="momandpopstore" />
           <Navbar />
           <main className="flex-1 flex flex-col">{children}</main>
           <Footer />
