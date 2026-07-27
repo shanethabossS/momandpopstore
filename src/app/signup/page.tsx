@@ -42,35 +42,15 @@ function SignupForm() {
     setMessage('')
 
     try {
-      const res = await fetch('/api/register', {
+      const res = await fetch('/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: fullName, email, phone, password }),
+        body: JSON.stringify({ full_name: fullName, email, phone, password }),
       })
 
       const data = await res.json()
       if (!res.ok) {
         setMessage(data.error || 'Registration failed')
-        return
-      }
-
-      const csrfRes = await fetch('/api/auth/csrf')
-      const { csrfToken } = await csrfRes.json()
-
-      const signInRes = await fetch('/api/auth/callback/credentials', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          csrfToken,
-          email,
-          password,
-          redirect: 'false',
-        }),
-      })
-
-      const signInData = await signInRes.json()
-      if (signInData.error) {
-        setMessage('Account created but sign-in failed. Please log in.')
         return
       }
 
@@ -84,27 +64,7 @@ function SignupForm() {
   }
 
   async function handleGoogleSignup() {
-    const csrfRes = await fetch('/api/auth/csrf')
-    const { csrfToken } = await csrfRes.json()
-
-    const form = document.createElement('form')
-    form.method = 'POST'
-    form.action = '/api/auth/signin/google'
-
-    const csrfInput = document.createElement('input')
-    csrfInput.type = 'hidden'
-    csrfInput.name = 'csrfToken'
-    csrfInput.value = csrfToken
-    form.appendChild(csrfInput)
-
-    const callbackInput = document.createElement('input')
-    callbackInput.type = 'hidden'
-    callbackInput.name = 'callbackUrl'
-    callbackInput.value = '/onboarding'
-    form.appendChild(callbackInput)
-
-    document.body.appendChild(form)
-    form.submit()
+    window.location.href = 'https://id.sovdigitalgroup.com?site=mompop&next=%2Fonboarding'
   }
 
   if (authLoading) return null

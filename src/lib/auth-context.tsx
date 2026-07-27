@@ -31,17 +31,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const refresh = useCallback(async () => {
     try {
-      const res = await fetch('/api/auth/session', { cache: 'no-store' })
+      const res = await fetch('/api/auth/me', { cache: 'no-store' })
       if (res.ok) {
         const session = await res.json()
-        if (session?.user) {
+        const current = session?.user || session
+        if (current?.id) {
           setUser({
-            id: session.user.id,
-            name: session.user.name,
-            email: session.user.email,
-            image: session.user.image,
-            isAdmin: session.user.isAdmin ?? false,
-            onboarded: session.user.onboarded ?? false,
+            id: current.id,
+            name: current.full_name || current.name,
+            email: current.email,
+            image: current.avatar_url || current.image,
+            isAdmin: current.is_super_admin ?? false,
+            onboarded: current.onboarded ?? false,
           })
         } else {
           setUser(null)
@@ -57,13 +58,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const logout = useCallback(async () => {
-    const res = await fetch('/api/auth/csrf')
-    const { csrfToken } = await res.json()
-
-    await fetch('/api/auth/signout', {
+    await fetch('/api/auth/logout', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams({ csrfToken }),
     })
 
     setUser(null)
@@ -71,7 +67,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    refresh()
+    const timer = window.setTimeout(() => void refresh(), 0)
+    return () => window.clearTimeout(timer)
   }, [refresh])
 
   return (

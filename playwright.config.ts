@@ -9,7 +9,7 @@ export default defineConfig({
   workers: 1,
   reporter: [['line'], ['html', { open: 'never' }]],
   use: {
-    baseURL: process.env.BASE_URL ?? 'https://shop868-web.vercel.app',
+    baseURL: process.env.BASE_URL ?? 'https://momandpopstore.com',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     headless: true,

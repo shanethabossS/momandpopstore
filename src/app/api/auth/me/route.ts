@@ -20,17 +20,14 @@ const CENTRAL_API = getApiBase();
 
 export async function GET(req: NextRequest) {
   const token = req.cookies.get('auth_token')?.value;
-  const fallbackHeader = req.headers.get('authorization');
-  const authHeader = token ? `Bearer ${token}` : fallbackHeader;
-
-  if (!authHeader) {
-    return NextResponse.json({ error: 'Not authenticated' }, { status: 401 });
+  if (!token) {
+    return NextResponse.json({ user: null });
   }
 
   try {
     const upstream = await fetch(`${CENTRAL_API}/api/auth/me`, {
       method: 'GET',
-      headers: { Authorization: authHeader },
+      headers: { Cookie: `auth_token=${token}` },
       cache: 'no-store',
     });
 
@@ -38,7 +35,11 @@ export async function GET(req: NextRequest) {
     let data: Record<string, unknown> = {};
     try { data = raw ? JSON.parse(raw) : {}; } catch { data = { error: raw || upstream.statusText }; }
 
-    return NextResponse.json(data, { status: upstream.status });
+    if (upstream.status === 401) return NextResponse.json({ user: null });
+    return NextResponse.json(data, {
+      status: upstream.status,
+      headers: { 'Cache-Control': 'private, no-store' },
+    });
   } catch {
     return NextResponse.json({ error: 'Auth service unavailable' }, { status: 503 });
   }

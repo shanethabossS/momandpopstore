@@ -23,7 +23,7 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Skip API, auth, and NextAuth routes
+  // Skip API and authentication routes
   if (
     url.pathname.startsWith('/api/') ||
     url.pathname.startsWith('/login') ||

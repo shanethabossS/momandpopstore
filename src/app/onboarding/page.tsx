@@ -108,19 +108,22 @@ export default function OnboardingPage() {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '');
 
-    const { error: shopError } = await apiFetch('/api/shops', {
+    const validProducts = form.products.filter((p) => p.name.trim() && p.price.trim());
+    const { error: shopError } = await apiFetch('/api/mompop/onboarding', {
       method: 'POST',
       body: JSON.stringify({
-        shop_name: form.shop_name,
-        shop_slug: slug,
+        name: form.shop_name,
+        slug,
         description: form.description,
-        category: form.category,
         address: form.address,
+        location: form.address,
         service_area: form.service_area,
-        hours: form.hours,
-        delivery: form.delivery,
-        pickup: form.pickup,
-        whatsapp: form.whatsapp,
+        hours: form.hours ? [form.hours] : [],
+        tags: form.category ? [form.category] : [],
+        offers_delivery: form.delivery,
+        offers_pickup: form.pickup,
+        whatsapp_number: form.whatsapp,
+        products: validProducts.map((product) => ({ title: product.name, price: Number(product.price), description: product.description })),
       }),
     });
 
@@ -128,21 +131,6 @@ export default function OnboardingPage() {
       setError(shopError);
       setLoading(false);
       return;
-    }
-
-    const validProducts = form.products.filter((p) => p.name.trim() && p.price.trim());
-    for (const product of validProducts) {
-      await apiFetch('/api/listings', {
-        method: 'POST',
-        body: JSON.stringify({
-          title: product.name,
-          price: parseFloat(product.price) || 0,
-          description: product.description,
-          category: form.category,
-          subcategory: 'general',
-          contact_whatsapp: form.whatsapp,
-        }),
-      });
     }
 
     router.replace('/dashboard');

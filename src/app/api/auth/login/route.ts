@@ -46,13 +46,17 @@ export async function POST(req: NextRequest) {
 
     if (!upstream.ok) return NextResponse.json(data, { status: upstream.status });
 
+    const token = typeof data.token === 'string' ? data.token : '';
+    const refreshToken = typeof data.refresh_token === 'string' ? data.refresh_token : '';
+    delete data.token;
+    delete data.refresh_token;
     const res = NextResponse.json(data, { status: upstream.status });
 
-    if (typeof data.token === 'string' && data.token) {
-      res.cookies.set('auth_token', data.token, { httpOnly: true, secure: true, sameSite: 'lax', maxAge: COOKIE_MAX_AGE, path: '/' });
+    if (token) {
+      res.cookies.set('auth_token', token, { httpOnly: true, secure: true, sameSite: 'lax', maxAge: COOKIE_MAX_AGE, path: '/' });
       res.cookies.set('auth_state', '1', { httpOnly: false, secure: true, sameSite: 'lax', maxAge: COOKIE_MAX_AGE, path: '/' });
-      if (typeof data.refresh_token === 'string' && data.refresh_token) {
-        res.cookies.set('refresh_token', data.refresh_token, { httpOnly: true, secure: true, sameSite: 'lax', maxAge: COOKIE_MAX_AGE * 4, path: '/' });
+      if (refreshToken) {
+        res.cookies.set('refresh_token', refreshToken, { httpOnly: true, secure: true, sameSite: 'lax', maxAge: COOKIE_MAX_AGE * 4, path: '/' });
       }
     }
 

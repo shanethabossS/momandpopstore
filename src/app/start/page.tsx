@@ -122,7 +122,6 @@ function StartForm() {
 
   // Step tracking for progress indicator
   const filledFields = Object.values(form).filter((v) => v.trim().length > 0).length;
-  const totalRequiredFields = 4; // ownerName, businessName, email/category, category
   const progressPercent = Math.round((filledFields / 12) * 100);
 
   function updateField<K extends keyof typeof form>(key: K, value: string) {
@@ -179,7 +178,7 @@ function StartForm() {
           </div>
           
           <div>
-            <h2 className="text-2xl font-black mb-2">You're all set, {form.ownerName.split(' ')[0]}!</h2>
+            <h2 className="text-2xl font-black mb-2">You&apos;re all set, {form.ownerName.split(' ')[0]}!</h2>
             <p className="text-muted-foreground max-w-md mx-auto">
               Thanks for signing up! Our team will reach out on WhatsApp within 24 hours to get your storefront live.
             </p>
@@ -223,7 +222,7 @@ function StartForm() {
           </Badge>
         </div>
         <CardDescription>
-          Fill in the details below and we'll have your business online within 48 hours.
+          Fill in the details below and we&apos;ll have your business online within 48 hours.
         </CardDescription>
       </CardHeader>
 
@@ -307,7 +306,7 @@ function StartForm() {
                 value={form.whatsapp}
                 onChange={(e) => updateField('whatsapp', e.target.value)}
               />
-              <p className="text-xs text-muted-foreground">We'll use this to contact you about your storefront.</p>
+              <p className="text-xs text-muted-foreground">We&apos;ll use this to contact you about your storefront.</p>
             </div>
 
             {/* Phone & Email Row */}

@@ -1,11 +1,9 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || '';
-
 export async function apiFetch<T = unknown>(
   path: string,
   options: RequestInit = {},
 ): Promise<{ data: T | null; error: string | null; status: number }> {
   try {
-    const res = await fetch(`${API_BASE}${path}`, {
+    const res = await fetch(path, {
       ...options,
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +26,7 @@ export async function apiFetch<T = unknown>(
     }
 
     return { data, error: null, status: res.status };
-  } catch (err) {
+  } catch {
     return { data: null, error: 'Network error', status: 0 };
   }
 }

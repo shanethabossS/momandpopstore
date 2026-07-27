@@ -23,7 +23,10 @@ function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState(() => {
+    const error = searchParams.get('error')
+    return error ? error.replace(/_/g, ' ') : ''
+  })
 
   const nextPath = useMemo(() => {
     const raw = searchParams.get('next')
@@ -36,38 +39,19 @@ function LoginForm() {
     }
   }, [authLoading, user, nextPath, router])
 
-  useEffect(() => {
-    const error = searchParams.get('error')
-    if (error) {
-      setMessage(error === 'OAuthAccountNotLinked'
-        ? 'This email is already registered with a different method.'
-        : error.replace(/_/g, ' '))
-    }
-  }, [searchParams])
-
   async function handleCredentialLogin(e: React.FormEvent) {
     e.preventDefault()
     setLoading(true)
     setMessage('')
 
     try {
-      const csrfRes = await fetch('/api/auth/csrf')
-      const { csrfToken } = await csrfRes.json()
-
-      const res = await fetch('/api/auth/callback/credentials', {
+      const res = await fetch('/api/auth/login', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-          csrfToken,
-          email,
-          password,
-          redirect: 'false',
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       })
 
-      const data = await res.json()
-
-      if (data.error) {
+      if (!res.ok) {
         setMessage('Invalid email or password')
         return
       }
@@ -82,27 +66,7 @@ function LoginForm() {
   }
 
   async function handleGoogleLogin() {
-    const csrfRes = await fetch('/api/auth/csrf')
-    const { csrfToken } = await csrfRes.json()
-
-    const form = document.createElement('form')
-    form.method = 'POST'
-    form.action = '/api/auth/signin/google'
-
-    const csrfInput = document.createElement('input')
-    csrfInput.type = 'hidden'
-    csrfInput.name = 'csrfToken'
-    csrfInput.value = csrfToken
-    form.appendChild(csrfInput)
-
-    const callbackInput = document.createElement('input')
-    callbackInput.type = 'hidden'
-    callbackInput.name = 'callbackUrl'
-    callbackInput.value = nextPath
-    form.appendChild(callbackInput)
-
-    document.body.appendChild(form)
-    form.submit()
+    window.location.href = `https://id.sovdigitalgroup.com?site=mompop&next=${encodeURIComponent(nextPath)}`
   }
 
   if (authLoading) return null
@@ -139,7 +103,10 @@ function LoginForm() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password">Password</Label>
+              <Link href="/forgot-password" className="text-xs font-semibold text-primary hover:underline">Forgot password?</Link>
+            </div>
             <Input
               id="password"
               type="password"

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import NextImage from 'next/image';
 import { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -36,15 +37,16 @@ type Listing = {
   status: string;
   image_url?: string;
   is_available?: boolean;
+  is_active?: boolean;
   _confirmText?: string;
 };
 
 type Shop = {
   id: string;
-  shop_name: string;
-  shop_slug: string;
+  name: string;
+  slug: string;
   description: string;
-  is_verified: boolean;
+  verified_tier?: string;
 };
 
 export default function DashboardPage() {
@@ -82,8 +84,12 @@ export default function DashboardPage() {
   useEffect(() => {
     if (authLoading) return;
     (async () => {
-      const { data: listingsData } = await apiFetch<{ listings: Listing[] }>('/api/listings');
-      if (listingsData?.listings) setListings(listingsData.listings);
+      const [dashboardResult, productsResult] = await Promise.all([
+        apiFetch<{ dashboard: Shop | null }>('/api/mompop/dashboard'),
+        apiFetch<{ products: Listing[] }>('/api/mompop/products/mine'),
+      ]);
+      if (dashboardResult.data?.dashboard) setShop(dashboardResult.data.dashboard);
+      if (productsResult.data?.products) setListings(productsResult.data.products);
       setLoadingData(false);
     })();
   }, [authLoading]);
@@ -91,19 +97,20 @@ export default function DashboardPage() {
   async function handleAddProduct(e: React.FormEvent) {
     e.preventDefault();
     setAddingProduct(true);
-    const { data, error } = await apiFetch<{ listing: Listing }>('/api/listings', {
+    if (!shop) return;
+    const { data } = await apiFetch<{ product: Listing }>('/api/mompop/products', {
       method: 'POST',
       body: JSON.stringify({
         title: newProduct.name,
         price: parseFloat(newProduct.price) || 0,
         description: newProduct.description,
-        category: newProduct.category,
-        subcategory: newProduct.subcategory,
+        storefront_id: shop.id,
+        tags: [newProduct.category, newProduct.subcategory],
         image_url: newProduct.image_url || undefined,
       }),
     });
-    if (data?.listing) {
-      setListings((prev) => [data.listing, ...prev]);
+    if (data?.product) {
+      setListings((prev) => [data.product, ...prev]);
       setNewProduct({ name: '', price: '', description: '', category: 'general', subcategory: 'general', image_url: '' });
       setShowAddForm(false);
       setToast({ message: 'Product added successfully!', type: 'success' });
@@ -116,7 +123,7 @@ export default function DashboardPage() {
   async function handleEditListing() {
     if (!editingListing) return;
     setSavingEdit(true);
-    const { data, error } = await apiFetch<{ listing: Listing }>(`/api/listings/${editingListing.id}`, {
+    const { data } = await apiFetch<{ product: Listing }>(`/api/mompop/products/${editingListing.id}`, {
       method: 'PATCH',
       body: JSON.stringify({
         title: editForm.name,
@@ -125,8 +132,8 @@ export default function DashboardPage() {
         image_url: editForm.image_url || undefined,
       }),
     });
-    if (data?.listing) {
-      setListings((prev) => prev.map((l) => l.id === editingListing.id ? data.listing : l));
+    if (data?.product) {
+      setListings((prev) => prev.map((l) => l.id === editingListing.id ? data.product : l));
       setEditingListing(null);
       setToast({ message: 'Product updated successfully!', type: 'success' });
     } else {
@@ -138,7 +145,7 @@ export default function DashboardPage() {
   async function handleDeleteListing() {
     if (!deletingListing) return;
     setDeletingItem(true);
-    const { error } = await apiFetch(`/api/listings/${deletingListing.id}`, {
+    const { error } = await apiFetch(`/api/mompop/products/${deletingListing.id}`, {
       method: 'DELETE',
     });
     if (!error) {
@@ -157,9 +164,9 @@ export default function DashboardPage() {
     const updatedListing = { ...listings.find(l => l.id === listingId)!, is_available: newStatus };
     setListings((prev) => prev.map((l) => l.id === listingId ? updatedListing : l));
     
-    await apiFetch(`/api/listings/${listingId}`, {
+    await apiFetch(`/api/mompop/products/${listingId}`, {
       method: 'PATCH',
-      body: JSON.stringify({ status: newStatus ? 'active' : 'inactive' }),
+      body: JSON.stringify({ is_active: newStatus }),
     });
     
     setToast({ 
@@ -242,7 +249,7 @@ export default function DashboardPage() {
             </Button>
           </Link>
           {shop && (
-            <Link href={`/store/${shop.shop_slug}`}>
+            <Link href={`/store/${shop.slug}`}>
               <Button size="sm">View store</Button>
             </Link>
           )}
@@ -353,7 +360,7 @@ export default function DashboardPage() {
             {/* No Search Results */}
             {listings.length > 0 && searchQuery && filteredListings.length === 0 && (
               <div className="py-8 text-center">
-                <p className="text-sm text-muted-foreground">No products match "{searchQuery}"</p>
+                <p className="text-sm text-muted-foreground">No products match &ldquo;{searchQuery}&rdquo;</p>
               </div>
             )}
 
@@ -364,7 +371,7 @@ export default function DashboardPage() {
                   {/* Product Image Thumbnail */}
                   {listing.image_url ? (
                     <div className="hidden size-16 shrink-0 overflow-hidden rounded-md bg-muted sm:block">
-                      <img src={listing.image_url} alt={listing.title} className="size-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
+                      <NextImage src={listing.image_url} alt={listing.title} width={64} height={64} unoptimized className="size-full object-cover" />
                     </div>
                   ) : (
                     <div className="hidden size-16 shrink-0 overflow-hidden rounded-md bg-muted sm:flex items-center justify-center">
@@ -597,18 +604,18 @@ export default function DashboardPage() {
               <div>
                 <h3 className="text-lg font-bold">Delete product?</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  "{deletingListing.title}" will be permanently removed. This cannot be undone.
+                  &ldquo;{deletingListing.title}&rdquo; will be permanently removed. This cannot be undone.
                 </p>
               </div>
               
               {!confirmDelete ? (
                 <div className="space-y-2 pt-2">
-                  <Label htmlFor="delete-confirm" className="text-xs text-center block">Type "DELETE" to confirm</Label>
+                  <Label htmlFor="delete-confirm" className="text-xs text-center block">Type &ldquo;DELETE&rdquo; to confirm</Label>
                   <Input 
                     id="delete-confirm" 
                     placeholder="DELETE" 
                     value={deletingListing._confirmText || ''}
-                    onChange={(e) => setDeletingListing({ ...deletingListing, _confirmText: e.target.value } as any)}
+                    onChange={(e) => setDeletingListing({ ...deletingListing, _confirmText: e.target.value })}
                     className="text-center"
                   />
                 </div>
