@@ -450,11 +450,195 @@
   max-width: 100%;
 }
 
+/* ── Filter pills ──────────────────────────────────────── */
+.mkt-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted-foreground);
+  background: var(--card);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.1s;
+}
+.mkt-pill:hover { color: var(--brand); border-color: color-mix(in oklch, var(--brand) 55%, var(--border)); }
+.mkt-pill:active { transform: scale(0.97); }
+.mkt-pill-active {
+  color: var(--brand-contrast);
+  background: var(--brand);
+  border-color: var(--brand);
+}
+
+/* ── Empty state ───────────────────────────────────────── */
+.mkt-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  border: 1px dashed var(--border);
+  border-radius: 1.25rem;
+  background: color-mix(in oklch, var(--muted) 45%, transparent);
+}
+.mkt-empty-mark {
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  background: color-mix(in oklch, var(--brand) 14%, var(--card));
+  border: 1px solid color-mix(in oklch, var(--brand) 28%, transparent);
+}
+
+/* ── Detail page media ─────────────────────────────────── */
+.mkt-detail-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--muted);
+  box-shadow: 0 12px 40px -18px color-mix(in oklch, var(--foreground) 40%, transparent);
+}
+
+/* ── Card image + hover flourishes ─────────────────────── */
+.mkt-card-media-wide { aspect-ratio: 1.42 / 1; }
+
+.mkt-card-img {
+  transition: transform 0.65s cubic-bezier(.22,.8,.25,1);
+  will-change: transform;
+}
+.mkt-card:hover .mkt-card-img { transform: scale(1.06); }
+
+/* bottom gradient scrim so chips stay legible on any photo */
+.mkt-card-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.12) 24%, transparent 46%);
+}
+
+/* diagonal light sweep that crosses the image on hover */
+.mkt-card-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,0.38) 48%, transparent 62%);
+  background-size: 250% 100%;
+  background-position: 150% 0;
+  opacity: 0;
+  transition: background-position 0.85s cubic-bezier(.22,.8,.25,1), opacity 0.25s ease;
+}
+.mkt-card:hover .mkt-card-sheen { opacity: 1; background-position: -50% 0; }
+
+/* glass price / rating chip — always visible, lifts slightly on hover */
+.mkt-price-chip {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 0.6rem;
+  padding: 0.28rem 0.62rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: rgba(10,12,16,0.52);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.16);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.22);
+  transition: transform 0.28s cubic-bezier(.22,.8,.25,1);
+}
+.mkt-card:hover .mkt-price-chip { transform: translateY(-2px); }
+
+/* favorite heart */
+.mkt-fav {
+  position: absolute;
+  right: 0.55rem;
+  top: 0.55rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: #fff;
+  background: rgba(10,12,16,0.32);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.18);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: transform 0.22s cubic-bezier(.22,.8,.25,1), opacity 0.22s ease, color 0.2s ease;
+}
+.mkt-card:hover .mkt-fav { opacity: 1; transform: scale(1); }
+.mkt-fav:hover { color: #ff5a79; }
+@media (hover: none) { .mkt-fav { opacity: 1; transform: none; } }
+
+/* verified badge (stores) */
+.mkt-verified {
+  position: absolute;
+  left: 0.6rem;
+  top: 0.6rem;
+  padding: 0.24rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--brand-contrast);
+  background: var(--brand);
+  box-shadow: 0 2px 10px color-mix(in oklch, var(--brand) 45%, transparent);
+}
+
+/* staggered reveal for grids */
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: mkt-rise 0.55s cubic-bezier(.22,.8,.25,1) forwards;
+}
+@keyframes mkt-rise { to { opacity: 1; transform: translateY(0); } }
+[data-reveal-stagger] > *:nth-child(1) { animation-delay: 0.02s; }
+[data-reveal-stagger] > *:nth-child(2) { animation-delay: 0.06s; }
+[data-reveal-stagger] > *:nth-child(3) { animation-delay: 0.10s; }
+[data-reveal-stagger] > *:nth-child(4) { animation-delay: 0.14s; }
+[data-reveal-stagger] > *:nth-child(5) { animation-delay: 0.18s; }
+[data-reveal-stagger] > *:nth-child(6) { animation-delay: 0.22s; }
+[data-reveal-stagger] > *:nth-child(7) { animation-delay: 0.26s; }
+[data-reveal-stagger] > *:nth-child(8) { animation-delay: 0.30s; }
+[data-reveal-stagger] > *:nth-child(9) { animation-delay: 0.34s; }
+[data-reveal-stagger] > *:nth-child(n+10) { animation-delay: 0.38s; }
+
+/* skeleton shimmer */
+.mkt-skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--muted);
+  border-radius: 1rem;
+}
+.mkt-skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, color-mix(in oklch, var(--foreground) 8%, transparent), transparent);
+  animation: mkt-shimmer 1.4s infinite;
+}
+@keyframes mkt-shimmer { 100% { transform: translateX(100%); } }
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] {
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .mkt-card-media * { transition: none !important; }
+  [data-reveal-stagger] > * { opacity: 1; transform: none; animation: none; }
+  .mkt-card-media *, .mkt-card-img, .mkt-card-sheen, .mkt-price-chip, .mkt-fav { transition: none !important; animation: none !important; }
+  .mkt-skeleton::after { animation: none; }
 }
