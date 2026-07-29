@@ -1,9 +1,16 @@
 import Link from 'next/link';
 import { MarketplaceMotion } from '@/components/MarketplaceMotion';
 import { StoreCard } from '@/components/StoreCard';
+import { RotatingWord } from '@/components/hero/RotatingWord';
+import { CountUp } from '@/components/hero/CountUp';
 import { getStorefronts, momPopDepartments } from '@/lib/mompop';
 
 export const revalidate = 300;
+
+const TICKER = momPopDepartments.slice(0, 12).map((d) => {
+  const slug = (d.href.split('category=')[1] || '').trim();
+  return { label: d.label, href: slug ? `/stores/category/${slug}` : d.href };
+});
 
 export default async function HomePage() {
   const [featuredStores, allStores] = await Promise.all([
@@ -18,11 +25,16 @@ export default async function HomePage() {
     <main className="mkt-surface bg-background">
       <MarketplaceMotion />
       <section data-market-hero className="mkt-hero">
+        <div className="mkt-hero-mesh" />
         <div className="mkt-hero-glow" />
+        <div className="mkt-hero-grain" />
         <div className="relative mx-auto grid min-h-[330px] max-w-[1600px] items-end gap-8 px-4 py-10 lg:grid-cols-[1.25fr_.75fr] lg:px-8 lg:py-12">
           <div data-reveal>
             <p className="mb-4 text-xs font-bold uppercase tracking-[0.22em] text-white/50">Independent commerce, curated</p>
-            <h1 className="max-w-5xl text-[clamp(3rem,7.2vw,7.4rem)] font-black leading-[0.82] tracking-[-0.075em]">Small stores. Big taste.</h1>
+            <h1 className="max-w-5xl text-[clamp(3rem,7vw,7rem)] font-black leading-[0.82] tracking-[-0.075em]">
+              Small stores.<br />Big <RotatingWord words={['taste', 'heart', 'hustle', 'flavour', 'love']} />.
+            </h1>
+            <p className="mt-5 flex items-center gap-2 text-sm font-medium text-white/55"><span aria-hidden="true">🇹🇹</span> Shop small, big up your neighbour — made in Trinidad &amp; Tobago.</p>
           </div>
           <div data-reveal className="pb-1 lg:pb-2">
             <p className="max-w-lg text-base leading-7 text-white/65 sm:text-lg">Discover standout independent businesses, products and services in one beautifully simple marketplace.</p>
@@ -31,6 +43,23 @@ export default async function HomePage() {
               <button className="mkt-btn-brand h-full rounded-full px-6 text-sm">Search</button>
             </form>
           </div>
+        </div>
+      </section>
+
+      <div className="mkt-ticker" aria-label="Browse by department">
+        <div className="mkt-ticker-track">
+          {[...TICKER, ...TICKER].map((item, i) => (
+            <Link key={i} href={item.href} className="mkt-ticker-item" aria-hidden={i >= TICKER.length}>{item.label}</Link>
+          ))}
+        </div>
+      </div>
+
+      <section data-reveal className="mx-auto max-w-[1600px] px-4 pt-8 lg:px-8">
+        <div className="mkt-statband">
+          <div className="mkt-stat"><div className="mkt-stat-value"><CountUp to={storefronts.length} /></div><div className="mkt-stat-label">Local storefronts</div></div>
+          <div className="mkt-stat"><div className="mkt-stat-value"><CountUp to={momPopDepartments.length} /></div><div className="mkt-stat-label">Categories</div></div>
+          <div className="mkt-stat"><div className="mkt-stat-value">🇹🇹</div><div className="mkt-stat-label">Made for T&amp;T</div></div>
+          <div className="mkt-stat"><div className="mkt-stat-value">✦</div><div className="mkt-stat-label">Order on WhatsApp</div></div>
         </div>
       </section>
 

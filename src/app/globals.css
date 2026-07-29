@@ -299,6 +299,136 @@
   );
 }
 
+/* slow drifting colour mesh for depth behind the glow */
+.mkt-hero-mesh {
+  pointer-events: none;
+  position: absolute;
+  inset: -25%;
+  opacity: 0.5;
+  filter: blur(34px);
+  background:
+    radial-gradient(38% 48% at 18% 28%, color-mix(in oklch, var(--brand) 55%, transparent), transparent 70%),
+    radial-gradient(34% 42% at 82% 18%, rgba(124, 92, 255, 0.28), transparent 70%),
+    radial-gradient(44% 52% at 68% 88%, color-mix(in oklch, var(--brand) 40%, transparent), transparent 72%);
+  animation: mkt-mesh 20s ease-in-out infinite alternate;
+}
+@keyframes mkt-mesh {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(2%, -2.5%, 0) scale(1.08); }
+  100% { transform: translate3d(-2%, 1.5%, 0) scale(1.05); }
+}
+
+/* film grain over the dark hero for a premium, non-flat finish */
+.mkt-hero-grain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* ── Rotating word ─────────────────────────────────────── */
+.mkt-rot { position: relative; display: inline-block; }
+.mkt-rot-ghost { visibility: hidden; }
+.mkt-rot-word {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  color: var(--brand);
+  animation: mkt-rot-in 0.5s cubic-bezier(.22,.8,.25,1);
+}
+.mkt-hero .mkt-rot-word { text-shadow: 0 0 34px color-mix(in oklch, var(--brand) 55%, transparent); }
+@keyframes mkt-rot-in {
+  from { opacity: 0; transform: translateY(0.42em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Discovery ticker ──────────────────────────────────── */
+.mkt-ticker {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklch, var(--brand) 6%, var(--background));
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+.mkt-ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: mkt-ticker 40s linear infinite;
+  will-change: transform;
+}
+.mkt-ticker:hover .mkt-ticker-track { animation-play-state: paused; }
+@keyframes mkt-ticker { to { transform: translateX(-50%); } }
+.mkt-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.7rem 1.15rem;
+  font-size: 0.82rem;
+  font-weight: 650;
+  color: var(--muted-foreground);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.mkt-ticker-item::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--brand);
+  opacity: 0.5;
+}
+.mkt-ticker-item:hover { color: var(--brand); }
+
+/* ── Stat band (count-up) ──────────────────────────────── */
+.mkt-statband {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+@media (min-width: 640px) { .mkt-statband { grid-template-columns: repeat(4, 1fr); } }
+.mkt-stat { background: var(--card); padding: 1.4rem 1.3rem; }
+.mkt-stat-value {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--brand);
+}
+.mkt-stat-label {
+  margin-top: 0.35rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* ── "Made in T&T" mark ────────────────────────────────── */
+.mkt-tt-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mkt-hero-mesh { animation: none; }
+  .mkt-rot-word { animation: none; }
+  .mkt-ticker-track { animation: none; }
+}
+
 /* ── Section headings ──────────────────────────────────── */
 .mkt-kicker {
   font-size: .68rem;
