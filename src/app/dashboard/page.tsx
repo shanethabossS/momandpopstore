@@ -417,7 +417,7 @@ export default function DashboardPage() {
                       className={`sm:hidden w-full flex items-center justify-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                         listing.is_available !== false 
                           ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
-                          : 'bg-gray-50 text-gray-600 border border-gray-200'
+                          : 'bg-muted text-muted-foreground border border-border'
                       }`}
                     >
                       <Switch checked={listing.is_available !== false} className="h-4 w-4" />
@@ -431,7 +431,7 @@ export default function DashboardPage() {
                         className={`rounded-md p-1.5 transition-colors ${
                           listing.is_available !== false 
                             ? 'text-emerald-600 hover:bg-emerald-50' 
-                            : 'text-gray-400 hover:bg-gray-50'
+                            : 'text-muted-foreground hover:bg-muted'
                         }`}
                         title={listing.is_available !== false ? 'Hide from store' : 'Show in store'}
                       >
@@ -442,14 +442,14 @@ export default function DashboardPage() {
                           setEditingListing(listing);
                           setEditForm({ name: listing.title, price: String(listing.price), description: listing.description || '', image_url: listing.image_url || '' });
                         }}
-                        className="rounded-md p-1.5 text-gray-400 hover:bg-muted hover:text-foreground transition-colors"
+                        className="rounded-md p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                         title="Edit product"
                       >
                         <Edit className="size-4" />
                       </button>
                       <button
                         onClick={() => { setDeletingListing(listing); setConfirmDelete(false); }}
-                        className="rounded-md p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-600 transition-colors"
+                        className="rounded-md p-1.5 text-muted-foreground hover:bg-red-500/10 hover:text-red-500 transition-colors"
                         title="Delete product"
                       >
                         <Trash2 className="size-4" />
