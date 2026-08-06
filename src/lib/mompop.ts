@@ -37,7 +37,9 @@ export const momPopDepartments = [
 ] as const;
 
 async function getJson<T>(path: string): Promise<T | null> {
-  const response = await fetch(`${apiBase}/api/mompop${path}`, { next: { revalidate: 300 } }).catch(() => null);
+  // Shared helper: raised so each page's own revalidate governs (the lower of
+  // page vs fetch wins). 300 here capped every route to a 5-min re-render.
+  const response = await fetch(`${apiBase}/api/mompop${path}`, { next: { revalidate: 86400 } }).catch(() => null);
   if (!response?.ok) return null;
   return response.json() as Promise<T>;
 }
