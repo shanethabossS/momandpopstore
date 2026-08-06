@@ -5,7 +5,9 @@ import { RotatingWord } from '@/components/hero/RotatingWord';
 import { CountUp } from '@/components/hero/CountUp';
 import { getStorefronts, momPopDepartments } from '@/lib/mompop';
 
-export const revalidate = 86400;
+// Marketplace homepage — new storefronts should surface within the hour, so 1h
+// rather than the 24h used on the long-tail /stores/category SEO pages.
+export const revalidate = 3600;
 
 const TICKER = momPopDepartments.slice(0, 12).map((d) => {
   const slug = (d.href.split('category=')[1] || '').trim();
