@@ -5,7 +5,7 @@ import { MarketplaceMotion } from '@/components/MarketplaceMotion';
 import { StoreCard } from '@/components/StoreCard';
 import { getStorefronts, momPopDepartments } from '@/lib/mompop';
 
-export const revalidate = 300;
+export const revalidate = 86400;
 export const dynamicParams = false;
 
 type Props = { params: Promise<{ slug: string }> };

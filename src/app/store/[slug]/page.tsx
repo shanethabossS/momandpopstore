@@ -4,7 +4,7 @@ import { getStorefront, getStorefrontProducts, money, whatsappUrl, type Product 
 import { SmartImage } from '@/components/media/SmartImage';
 import { MarketplaceMotion } from '@/components/MarketplaceMotion';
 
-export const revalidate = 300;
+export const revalidate = 3600;
 
 type Props = { params: Promise<{ slug: string }> };
 

@@ -5,7 +5,7 @@ import { RotatingWord } from '@/components/hero/RotatingWord';
 import { CountUp } from '@/components/hero/CountUp';
 import { getStorefronts, momPopDepartments } from '@/lib/mompop';
 
-export const revalidate = 300;
+export const revalidate = 86400;
 
 const TICKER = momPopDepartments.slice(0, 12).map((d) => {
   const slug = (d.href.split('category=')[1] || '').trim();
