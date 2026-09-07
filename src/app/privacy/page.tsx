@@ -7,7 +7,7 @@ export default function PrivacyPage() {
       <p className="mt-4 text-sm text-muted-foreground">Last updated: May 2026</p>
       <div className="mt-6 space-y-4 text-muted-foreground leading-7">
         <p>
-          Sovereign Digital Group Limited operates Mom &amp; Pop Marketplace. This policy explains how
+          Sovereign Digital Solutions Limited operates Mom &amp; Pop Marketplace. This policy explains how
           we collect, use, and protect your information.
         </p>
         <h2 className="text-lg font-bold text-foreground">What we collect</h2>

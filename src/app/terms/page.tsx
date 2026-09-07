@@ -8,7 +8,7 @@ export default function TermsPage() {
       <div className="mt-6 space-y-4 text-muted-foreground leading-7">
         <p>
           By using Mom &amp; Pop Marketplace, you agree to these terms. This platform is operated by
-          Sovereign Digital Group Limited, registered in Trinidad and Tobago.
+          Sovereign Digital Solutions Limited, registered in Trinidad and Tobago.
         </p>
         <h2 className="text-lg font-bold text-foreground">Merchant accounts</h2>
         <p>

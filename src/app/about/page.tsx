@@ -12,7 +12,7 @@ export default function AboutPage() {
           Fygaro payment links.
         </p>
         <p>
-          Powered by Sovereign Digital Group Limited, we share a trust layer, KYC verification, and
+          Powered by Sovereign Digital Solutions Limited, we share a trust layer, KYC verification, and
           support infrastructure across the SOV Network of T&amp;T digital products.
         </p>
         <p>

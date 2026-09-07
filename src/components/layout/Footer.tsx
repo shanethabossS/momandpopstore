@@ -15,10 +15,10 @@ export function Footer() {
             <span className="font-bold text-foreground">Mom &amp; Pop Store</span>
           </div>
           <p className="max-w-xs text-xs leading-5">
-            Verified Trinidad and Tobago local storefronts. Powered by Sovereign Digital Group Limited.
+            Verified Trinidad and Tobago local storefronts. Powered by Sovereign Digital Solutions Limited.
           </p>
           <p className="text-xs">
-            &copy; {new Date().getFullYear()} Sovereign Digital Group Limited. All rights reserved.
+            &copy; {new Date().getFullYear()} Sovereign Digital Solutions Limited. All rights reserved.
           </p>
         </div>
 

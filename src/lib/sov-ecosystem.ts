@@ -1,5 +1,5 @@
 /**
- * SOV Digital Group — Ecosystem site directory
+ * Sovereign Digital Solutions Limited — Ecosystem site directory
  *
  * CANONICAL SOURCE: Copy this file to every SOV app's src/lib/sov-ecosystem.ts
  * When adding/removing a site, update this file and copy to all apps.
