@@ -30,6 +30,18 @@ export const metadata: Metadata = {
     template: '%s | Mom & Pop Store',
   },
   description: defaultDescription,
+  keywords: [
+    'Mom and Pop Store',
+    'Mom & Pop Store TT',
+    'local shops Trinidad and Tobago',
+    'buy local Trinidad',
+    'online shopping Trinidad',
+    'small businesses Trinidad and Tobago',
+    'local marketplace Trinidad',
+    'Tobago shops',
+    'WhatsApp shopping Trinidad',
+    'Trinidad and Tobago',
+  ],
   alternates: {
     canonical: '/',
   },
@@ -50,6 +62,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     type: 'website',
     siteName: 'Mom & Pop Store',
+    locale: 'en_TT',
   },
   twitter: {
     card: 'summary_large_image',
@@ -78,15 +91,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'WebSite',
-              name: 'Mom & Pop Store',
-              url: siteUrl,
-              description: defaultDescription,
-              potentialAction: {
-                '@type': 'SearchAction',
-                target: `${siteUrl}/stores?search={search_term_string}`,
-                'query-input': 'required name=search_term_string',
-              },
+              '@graph': [
+                {
+                  '@type': 'Organization',
+                  name: 'Mom & Pop Store',
+                  url: siteUrl,
+                  parentOrganization: {
+                    '@type': 'Organization',
+                    name: 'Sovereign Digital Solutions Limited',
+                    url: 'https://sovdigitalgroup.com',
+                  },
+                  areaServed: { '@type': 'Country', name: 'Trinidad and Tobago' },
+                },
+                {
+                  '@type': 'WebSite',
+                  name: 'Mom & Pop Store',
+                  url: siteUrl,
+                  inLanguage: 'en-TT',
+                  description: defaultDescription,
+                  potentialAction: {
+                    '@type': 'SearchAction',
+                    target: `${siteUrl}/stores?search={search_term_string}`,
+                    'query-input': 'required name=search_term_string',
+                  },
+                },
+              ],
             }),
           }}
         />
