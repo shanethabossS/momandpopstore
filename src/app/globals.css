@@ -799,3 +799,197 @@
   .mkt-card-media *, .mkt-card-img, .mkt-card-sheen, .mkt-price-chip, .mkt-fav { transition: none !important; animation: none !important; }
   .mkt-skeleton::after { animation: none; }
 }
+
+:root {
+  --sov-page: #f7f5ef;
+  --sov-nav: #17353e;
+  --sov-ink: #172e35;
+  --sov-muted: #536367;
+  --sov-border: #e0e4df;
+  --sov-card: #ffffff;
+  --sov-accent: #a9583b;
+  --sov-hero: #f0eee6;
+  --sov-radius-card: 10px;
+  --sov-radius-hero: 16px;
+  --sov-content-width: 1444px;
+  --background: var(--sov-page);
+  --foreground: var(--sov-ink);
+  --card: var(--sov-card);
+  --card-foreground: var(--sov-ink);
+  --popover: var(--sov-card);
+  --popover-foreground: var(--sov-ink);
+  --brand: var(--sov-accent);
+  --brand-strong: #91472f;
+  --brand-contrast: #ffffff;
+  --primary: var(--sov-accent);
+  --primary-foreground: #ffffff;
+  --secondary: #e9ece6;
+  --secondary-foreground: var(--sov-ink);
+  --muted: #eceee8;
+  --muted-foreground: var(--sov-muted);
+  --accent: #f0eee6;
+  --accent-foreground: var(--sov-ink);
+  --border: var(--sov-border);
+  --input: var(--sov-border);
+  --ring: var(--sov-accent);
+  --sidebar: var(--sov-card);
+  --sidebar-foreground: var(--sov-ink);
+  --sidebar-primary: var(--sov-accent);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--sov-hero);
+  --sidebar-accent-foreground: var(--sov-ink);
+  --sidebar-border: var(--sov-border);
+  --sidebar-ring: var(--sov-accent);
+  --radius: 0.625rem;
+}
+
+.dark {
+  --sov-page: #102128;
+  --sov-nav: #102128;
+  --sov-ink: #eff5f2;
+  --sov-muted: #b2c2bf;
+  --sov-border: #36505a;
+  --sov-card: #182e36;
+  --sov-accent: #d88766;
+  --sov-hero: #182e36;
+  --background: var(--sov-page);
+  --foreground: var(--sov-ink);
+  --card: var(--sov-card);
+  --card-foreground: var(--sov-ink);
+  --popover: var(--sov-card);
+  --popover-foreground: var(--sov-ink);
+  --brand: #c47759;
+  --brand-strong: #d88766;
+  --brand-contrast: #172e35;
+  --primary: #c47759;
+  --primary-foreground: #172e35;
+  --secondary: #203943;
+  --secondary-foreground: var(--sov-ink);
+  --muted: #203943;
+  --muted-foreground: var(--sov-muted);
+  --accent: #203943;
+  --accent-foreground: var(--sov-ink);
+  --border: var(--sov-border);
+  --input: var(--sov-border);
+  --ring: var(--sov-accent);
+  --sidebar: var(--sov-page);
+  --sidebar-foreground: var(--sov-ink);
+  --sidebar-primary: #c47759;
+  --sidebar-primary-foreground: #172e35;
+  --sidebar-accent: var(--sov-card);
+  --sidebar-accent-foreground: var(--sov-ink);
+  --sidebar-border: var(--sov-border);
+  --sidebar-ring: var(--sov-accent);
+}
+
+body {
+  background: var(--sov-page);
+  color: var(--sov-ink);
+}
+
+nav.sticky.top-0 {
+  background: var(--sov-nav);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  backdrop-filter: none;
+}
+
+nav.sticky.top-0 a {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+nav.sticky.top-0 input {
+  color: var(--sov-ink);
+}
+
+nav.sticky.top-0 input::placeholder {
+  color: var(--sov-muted);
+}
+
+nav.sticky.top-0 .mkt-btn-brand {
+  color: #ffffff;
+}
+
+nav.sticky.top-0 > div:last-child {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.mkt-header {
+  background-color: var(--sov-nav);
+  color: #ffffff;
+}
+
+.mkt-hero {
+  background: var(--sov-hero);
+  border-radius: var(--sov-radius-hero);
+  box-shadow: none;
+}
+
+.mkt-hero-glow,
+.mkt-hero-mesh,
+.mkt-hero-grain {
+  display: none;
+}
+
+.mkt-hero .mkt-rot-word {
+  text-shadow: none;
+}
+
+.mkt-card,
+.mkt-stat,
+.mkt-empty,
+.mkt-store-banner {
+  border-color: var(--sov-border);
+  border-radius: var(--sov-radius-card);
+  box-shadow: 0 2px 8px rgba(23, 46, 53, 0.07);
+}
+
+.mkt-card-sheen {
+  display: none;
+}
+
+.mkt-btn-brand {
+  color: #ffffff;
+}
+
+.mkt-btn-brand:hover {
+  background: color-mix(in srgb, var(--brand) 82%, #172e35);
+}
+
+.dark .mkt-btn-brand {
+  color: #172e35;
+}
+
+.dark .mkt-btn-brand:hover {
+  color: #172e35;
+}
+
+.dark nav.sticky.top-0 .mkt-btn-brand {
+  color: #172e35;
+}
+
+nav.sticky.top-0 a:focus-visible,
+nav.sticky.top-0 button:focus-visible,
+.mkt-hero a:focus-visible,
+.mkt-card:focus-visible,
+.mkt-btn-brand:focus-visible {
+  outline: 3px solid var(--sov-accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  nav.sticky.top-0,
+  .mkt-card,
+  .mkt-card-media *,
+  .mkt-btn-brand,
+  .mkt-theme-toggle {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .mkt-hero {
+    border-radius: 14px;
+  }
+}
