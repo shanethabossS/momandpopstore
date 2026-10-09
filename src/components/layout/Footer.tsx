@@ -56,6 +56,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 16, padding: "16px", fontSize: 13 }}><span>Company support</span><a href="tel:+18682593200">868-259-3200</a><a href="https://wa.me/18682593200" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+        </footer>
   );
 }
