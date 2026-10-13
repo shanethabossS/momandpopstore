@@ -16,7 +16,9 @@ export default function AboutPage() {
           support infrastructure across the SOV Network of T&amp;T digital products.
         </p>
         <p>
-          Have questions? Email info@sovdigitalgroup.com or databosstt@gmail.com.
+          Have questions? Email <a href="mailto:shop868@sovdigitalgroup.com">shop868@sovdigitalgroup.com</a>,{' '}
+          <a href="mailto:info@sovdigitalgroup.com">info@sovdigitalgroup.com</a> or{' '}
+          <a href="mailto:databosstt@gmail.com">databosstt@gmail.com</a>.
         </p>
       </div>
     </div>
