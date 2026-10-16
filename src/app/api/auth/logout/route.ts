@@ -7,7 +7,13 @@ export async function POST(req: NextRequest) {
   if (token) {
     await fetch(`${apiBase}/api/auth/logout`, {
       method: 'POST',
-      headers: { Cookie: `auth_token=${token}` },
+      // Bearer, not the cookie alone: the deployed middleware reads the Authorization
+      // header only, so a cookie-only logout never revoked anything upstream — the local
+      // cookies cleared and the central session stayed alive.
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Cookie: `auth_token=${token}`,
+      },
       cache: 'no-store',
     }).catch(() => null);
   }

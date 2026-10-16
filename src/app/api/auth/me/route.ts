@@ -27,7 +27,16 @@ export async function GET(req: NextRequest) {
   try {
     const upstream = await fetch(`${CENTRAL_API}/api/auth/me`, {
       method: 'GET',
-      headers: { Cookie: `auth_token=${token}` },
+      // Bearer is what the DEPLOYED middleware reads — it takes the token from the
+      // Authorization header only. Forwarding the cookie alone was byte-identical to
+      // sending no credentials at all ("No token provided"), so a signed-in visitor
+      // always came back as null and the whole signed-in side of the app stayed dark.
+      // The cookie goes too, so this keeps working against the newer middleware that
+      // reads it, which is staged but not released.
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Cookie: `auth_token=${token}`,
+      },
       cache: 'no-store',
     });
 

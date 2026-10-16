@@ -10,7 +10,16 @@ async function forward(req: NextRequest, context: { params: Promise<{ path: stri
   const contentType = req.headers.get('content-type');
   if (contentType) headers.set('content-type', contentType);
   const token = req.cookies.get('auth_token')?.value;
-  if (token) headers.set('cookie', `auth_token=${token}`);
+  if (token) {
+    // Bearer is what the DEPLOYED middleware reads — it takes the token from the
+    // Authorization header only, and a cookie-only request is byte-identical to one with
+    // no credentials ("No token provided"). Every authenticated action on this site went
+    // through here, so onboarding, storefront creation, products, the dashboard, reviews,
+    // subscriptions and checkout all 401'd. The cookie is sent as well so this keeps
+    // working against the newer middleware that reads it, which is staged but not released.
+    headers.set('authorization', `Bearer ${token}`);
+    headers.set('cookie', `auth_token=${token}`);
+  }
   const upstream = await fetch(url, {
     method: req.method,
     headers,
